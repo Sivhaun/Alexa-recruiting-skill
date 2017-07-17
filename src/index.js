@@ -1,22 +1,17 @@
 /* eslint-disable  func-names */
 /* eslint quote-props: ["error", "consistent"]*/
-/**
- * This sample demonstrates a simple skill built with the Amazon Alexa Skills
- * nodejs skill development kit.
- * This sample supports multiple lauguages. (en-US, en-GB, de-DE).
- * The Intent Schema, Custom Slots and Sample Utterances for this skill, as well
- * as testing instructions are located at https://github.com/alexa/skill-sample-nodejs-fact
- **/
-
 'use strict';
 
 const Alexa = require('alexa-sdk');
+const http = require('http');
 
-const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
+const APP_ID = undefined;
 
-var START_MESSAGE = "Hello hungry child! "
+var START_MESSAGE = "Hello hungry child!"
 
 var NO_CONSENT_MESSAGE = "You have not given consent to use your location. Because of this, I cannot use this skill. If you change your mind, re-enable the skill and consent to giving your location."
+
+var ASK_RESTURANT = "Which fast food establishment would you like to purchase tendies from?"
 
 var STOP_MESSAGE = "Goodbye"
 
@@ -24,31 +19,54 @@ const handlers = {
     'LaunchRequest': function () {
         this.emit('Start');
     },
-    'GetTendies': function () {
+    'GetTendiesIntent': function () {
         this.emit('GetTendies');
     },
+    'LocationIntent': function () {
+      this.emit('FindNearestLocation');
+    },
     'Start': function () {
-      var deviceID = this.event.context.System.device.deviceId;
-      var consentToken = this.event.context.System.user.permissions.consentToken;
-
-      if (isEmpty(consentToken))
-      {
-        this.emit(':tell', NO_CONSENT_MESSAGE, STOP_MESSAGE);
-      }
-
       this.emit(':tell', START_MESSAGE);
     },
     'GetTendies': function () {
-        // Get a random space fact from the space facts list
-        // Use this.t() to get corresponding language data
-        const factArr = this.t('FACTS');
-        const factIndex = Math.floor(Math.random() * factArr.length);
-        const randomFact = factArr[factIndex];
+        //Before going forward, we need to check if they gave consent to provide location data
+        if(!givenConsent()) {
+          this.emit(':tell',NO_CONSENT_MESSAGE,STOP_MESSAGE)
+        }
 
-        // Create speech output
-        const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
+        //now ask them where they want tendies from
+        this.emit(":ask",ASK_RESTURANT)
     },
+    'FindNearestLocation': function () {
+      var resturant = this.event.request.intent.slots["Location"].value;
+      var deviceid = this.event.context.System.device.deviceId;
+      var consentToken = this.event.context.System.user.permissions.consentToken;
+
+      //construct http request to get location
+      var options = {
+        host:'api.amazonalexa.com',
+        port: 80,
+        path:'/v1/devices/deviceId/settings/address/countryAndPostalCode',
+        method: 'GET',
+        auth: 'Bearer Atc|consentToken'
+      };
+
+      callback = function(response) {
+        var str = '';
+
+  //another chunk of data has been recieved, so append it to `str`
+        response.on('data', function (chunk) {
+          str += chunk;
+        });
+
+  //the whole response has been recieved, so we just print it out here
+      response.on('end', function () {
+        console.log(str);
+      });
+    }
+
+      http.request(options, callback).end();
+    }
     'AMAZON.HelpIntent': function () {
         const speechOutput = HELP_MESSAGE;
         const reprompt = HELP_MESSAGE;
@@ -76,4 +94,10 @@ exports.handler = function (event, context) {
 //helper functions
 function isEmpty(str) {
   return (!str || 0 === str.length);
+}
+
+function givenConsent() {
+  var consentToken = this.event.context.System.user.permissions.consentToken;
+
+  return isEmpty(consentToken);
 }
