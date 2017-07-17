@@ -1,2 +1,2 @@
 # GiveMeTendies
-Alexa skill to find the nearest location of tendies based on fast food restaurant of your choice
+Alexa, Alexa, give me tendies. May she be skillful, and locate them quickly. I utter my favorite rapid meal respite, and you return to me the location of my present.
