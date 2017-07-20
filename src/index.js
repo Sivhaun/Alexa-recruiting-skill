@@ -17,6 +17,10 @@ var ASK_BUISSNESS_TYPE ="What area of the buissness are you intrested in? Mortga
 
 var STOP_MESSAGE = "Goodbye, thank you for your intrest in Quicken Loans"
 
+/* Stepan's Intentions */
+var ASK_EMPLOYMENT_TYPE = "What kind of employment are you looking for?";
+var ASK_FIELD_INTEREST = "Is there any field you would like to apply in particular?";
+
 const handlers = {
     'LaunchRequest': function () 
     {
@@ -76,7 +80,8 @@ const handlers = {
     }
 
       http.request(options, callback).end();
-    }
+    },
+
     'AMAZON.HelpIntent': function () {
         const speechOutput = HELP_MESSAGE;
         const reprompt = HELP_MESSAGE;
@@ -88,6 +93,15 @@ const handlers = {
     'AMAZON.StopIntent': function () {
         this.emit(':tell', STOP_MESSAGE);
     },
+
+    /* full-time, part-time, internship? */
+    'getEmploymentType': function () {
+        this.emit(":ask", ASK_EMPLOYMENT_TYPE)
+    },
+
+    'getFieldInterest': function () {
+        this.emit(":ask", ASK_FIELD_INTEREST)
+    }
 };
 
 var handlers = Alexa.
