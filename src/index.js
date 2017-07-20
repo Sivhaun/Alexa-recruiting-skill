@@ -7,19 +7,16 @@ const http = require('http');
 
 const APP_ID = undefined;
 
-var START_MESSAGE = "Hello! thank you for your intrest in applying to quickien loans"
+var START_MESSAGE = "Hello! Thank you for your intrest in applying to quickien loans"
 
 var NO_CONSENT_MESSAGE = "You have not given consent to use your location. Because of this, I cannot use this skill. If you change your mind, re-enable the skill and consent to giving your location."
-
-var ASK_EMPLOYMENT_TYPE = "Which kind of employment are you looking for? full time, part time, or internship?"
-
-var ASK_BUISSNESS_TYPE ="What area of the buissness are you intrested in? Mortgage banking, techonolgy, or other?"
 
 var STOP_MESSAGE = "Goodbye, thank you for your intrest in Quicken Loans"
 
 /* Stepan's Intentions */
-var ASK_EMPLOYMENT_TYPE = "What kind of employment are you looking for?";
-var ASK_FIELD_INTEREST = "Is there any field you would like to apply in particular?";
+var ASK_EMPLOYMENT_TYPE = "What kind of employment are you looking for? Full time, part time, or internship?"
+
+var ASK_FIELD_INTEREST = "What area of the buissness are you intrested in? Mortgage banking, techonolgy, or other?"
 
 const handlers = {
     'LaunchRequest': function () 
