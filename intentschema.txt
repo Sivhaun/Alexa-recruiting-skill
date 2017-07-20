@@ -1,0 +1,16 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "Location",
+          "type": "TENDIE_LOCATION"
+        }
+      ],
+      "intent": "LocationIntent"
+    },
+    {
+      "intent": "GetTendiesIntent"
+    }
+  ]
+}
