@@ -18,7 +18,7 @@ var ASK_EMPLOYMENT_TYPE = "What kind of employment are you looking for? Full tim
 
 var ASK_FIELD_INTEREST = "What area of the buissness are you intrested in? Mortgage banking, techonolgy, or other?"
 
-const handlers = {
+/* const handlers = {
     'LaunchRequest': function () 
     {
         this.emit('Start');
@@ -48,7 +48,7 @@ const handlers = {
     },
     'FindNearestLocation': function () 
     {
-      var resturant = this.event.request.intent.slots["Location"].value;
+      var resturant = this.event.request.intent.slots["buissnesIntent"].value;
       var deviceid = this.event.context.System.device.deviceId;
       var consentToken = this.event.context.System.user.permissions.consentToken;
 
@@ -91,7 +91,7 @@ const handlers = {
         this.emit(':tell', STOP_MESSAGE);
     },
 
-    /* full-time, part-time, internship? */
+    /* full-time, part-time, internship? 
     'getEmploymentIntent': function () {
         this.emit(":ask", ASK_EMPLOYMENT_TYPE)
     },
@@ -100,7 +100,7 @@ const handlers = {
         this.emit(":ask", ASK_FIELD_INTEREST)
     }
 };
-
+*/ 
 var handlers = Alexa.
 
 exports.handler = function (event, context) {
@@ -111,6 +111,7 @@ exports.handler = function (event, context) {
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
+
 
 //helper functions
 function isEmpty(str) {
