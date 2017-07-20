@@ -95,11 +95,11 @@ const handlers = {
     },
 
     /* full-time, part-time, internship? */
-    'getEmploymentType': function () {
+    'getEmploymentIntent': function () {
         this.emit(":ask", ASK_EMPLOYMENT_TYPE)
     },
 
-    'getFieldInterest': function () {
+    'getFieldInterestIntent': function () {
         this.emit(":ask", ASK_FIELD_INTEREST)
     }
 };
