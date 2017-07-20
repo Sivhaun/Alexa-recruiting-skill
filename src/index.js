@@ -7,7 +7,7 @@ const http = require('http');
 
 const APP_ID = undefined;
 
-var START_MESSAGE = "Hello hungry child!"
+var START_MESSAGE = "Hello! thank you for your intrest in applying to quickien loans"
 
 var NO_CONSENT_MESSAGE = "You have not given consent to use your location. Because of this, I cannot use this skill. If you change your mind, re-enable the skill and consent to giving your location."
 
@@ -16,34 +16,42 @@ var ASK_RESTURANT = "Which fast food establishment would you like to purchase te
 var STOP_MESSAGE = "Goodbye"
 
 const handlers = {
-    'LaunchRequest': function () {
+    'LaunchRequest': function () 
+    {
         this.emit('Start');
     },
-    'GetTendiesIntent': function () {
+    'GetTendiesIntent': function () 
+    {
         this.emit('GetTendies');
     },
-    'LocationIntent': function () {
+    'LocationIntent': function () 
+    {
       this.emit('FindNearestLocation');
     },
-    'Start': function () {
+    'Start': function () 
+    {
       this.emit(':tell', START_MESSAGE);
     },
-    'GetTendies': function () {
+    'GetTendies': function () 
+    {
         //Before going forward, we need to check if they gave consent to provide location data
-        if(!givenConsent()) {
+        if(!givenConsent()) 
+        {
           this.emit(':tell',NO_CONSENT_MESSAGE,STOP_MESSAGE)
         }
 
         //now ask them where they want tendies from
         this.emit(":ask",ASK_RESTURANT)
     },
-    'FindNearestLocation': function () {
+    'FindNearestLocation': function () 
+    {
       var resturant = this.event.request.intent.slots["Location"].value;
       var deviceid = this.event.context.System.device.deviceId;
       var consentToken = this.event.context.System.user.permissions.consentToken;
 
       //construct http request to get location
-      var options = {
+      var options = 
+          {
         host:'api.amazonalexa.com',
         port: 80,
         path:'/v1/devices/deviceId/settings/address/countryAndPostalCode',
