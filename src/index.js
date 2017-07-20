@@ -11,9 +11,11 @@ var START_MESSAGE = "Hello! thank you for your intrest in applying to quickien l
 
 var NO_CONSENT_MESSAGE = "You have not given consent to use your location. Because of this, I cannot use this skill. If you change your mind, re-enable the skill and consent to giving your location."
 
-var ASK_RESTURANT = "Which fast food establishment would you like to purchase tendies from?"
+var ASK_EMPLOYMENT_TYPE = "Which kind of employment are you looking for? full time, part time, or internship?"
 
-var STOP_MESSAGE = "Goodbye"
+var ASK_BUISSNESS_TYPE ="What area of the buissness are you intrested in? Mortgage banking, techonolgy, or other?"
+
+var STOP_MESSAGE = "Goodbye, thank you for your intrest in Quicken Loans"
 
 const handlers = {
     'LaunchRequest': function () 
