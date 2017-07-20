@@ -1,0 +1,8 @@
+LocationIntent {Location}
+LocationIntent i want tendies from {Location}
+LocationIntent from {Location}
+GetTendiesIntent give me tendies
+GetTendiesIntent i want tendies
+GetTendiesIntent tendies please
+GetTendiesIntent i desire tendies
+GetTendiesIntent i'm craving tendies
