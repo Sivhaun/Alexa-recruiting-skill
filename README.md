@@ -1,4 +1,2 @@
-# GiveMeTendies
-Alexa, Alexa, give me tendies. May she be skillful, and locate them quickly. I utter my favorite rapid meal respite, and you return to me the location of my delight.
+this application is from hackapolloza as a rectuiting skill that talks a user through the application process 
 
-![anticipatingtendies](http://i0.kym-cdn.com/photos/images/newsfeed/000/839/069/902.gif)
